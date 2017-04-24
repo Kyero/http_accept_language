@@ -3,7 +3,7 @@ module HttpAcceptLanguage
     attr_accessor :header
 
     def initialize(header)
-      @header = header.is_a? Array ? header : [header]
+      @header = header
     end
 
     # Returns a sorted array based on user preference in HTTP_ACCEPT_LANGUAGE.
@@ -68,6 +68,7 @@ module HttpAcceptLanguage
           preferred == available || preferred_language == available.split('-', 2).first
         end
       end.compact.first
+      header
     end
 
     # Returns a supplied list of available locals without any extra application info
