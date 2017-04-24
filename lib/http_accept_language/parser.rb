@@ -48,6 +48,7 @@ module HttpAcceptLanguage
     #   # => 'nl'
     #
     def preferred_language_from(array)
+      return @header
       (user_preferred_languages & array.map(&:to_s)).first
     end
 
@@ -59,7 +60,6 @@ module HttpAcceptLanguage
     #   request.compatible_language_from I18n.available_locales
     #
     def compatible_language_from(available_languages)
-      return @header
       user_preferred_languages.map do |preferred| #en-US
         preferred = preferred.downcase
         preferred_language = preferred.split('-', 2).first
