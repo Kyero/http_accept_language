@@ -59,6 +59,7 @@ module HttpAcceptLanguage
     #   request.compatible_language_from I18n.available_locales
     #
     def compatible_language_from(available_languages)
+      return @header
       user_preferred_languages.map do |preferred| #en-US
         preferred = preferred.downcase
         preferred_language = preferred.split('-', 2).first
@@ -68,7 +69,6 @@ module HttpAcceptLanguage
           preferred == available || preferred_language == available.split('-', 2).first
         end
       end.compact.first
-      header
     end
 
     # Returns a supplied list of available locals without any extra application info
