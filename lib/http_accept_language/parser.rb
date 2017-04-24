@@ -20,7 +20,7 @@ module HttpAcceptLanguage
           locale, quality = language.split(';q=')
           raise ArgumentError, 'Not correctly formatted' unless locale =~ /^[a-z\-0-9]+|\*$/i
 
-          locale  = locale.downcase.gsub(/-[a-z0-9]+$/i, &:upcase) # Uppercase territory
+          locale  = locale.downcase.gsub(/-[a-z0-9]+$/i, '') # Remove country
           locale  = nil if locale == '*' # Ignore wildcards
 
           quality = quality ? quality.to_f : 1.0
@@ -48,7 +48,6 @@ module HttpAcceptLanguage
     #   # => 'nl'
     #
     def preferred_language_from(array)
-      return @header
       (user_preferred_languages & array.map(&:to_s)).first
     end
 
