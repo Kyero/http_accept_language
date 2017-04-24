@@ -3,7 +3,7 @@ module HttpAcceptLanguage
     attr_accessor :header
 
     def initialize(header)
-      @header = header
+      @header = header.is_a? Array ? header : [header]
     end
 
     # Returns a sorted array based on user preference in HTTP_ACCEPT_LANGUAGE.
